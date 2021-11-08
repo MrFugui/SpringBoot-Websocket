@@ -1,0 +1,65 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>login</title>
+    <script src="./js/jquery-1.12.3.min.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .vertical-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+<div class="container vertical-center">
+    <div class="col-md-6 col-md-offset-3">
+        <form>
+            <h2>登录师徒系统</h2>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" name="username" id="username" class="form-control" placeholder="Username" required
+                   autofocus/>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Password"
+                   required/>
+            <!--        <label for="inputEmail" class="sr-only">userid</label>-->
+            <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="login()">login</button>
+        </form>
+
+    </div>
+</div> <!-- /container -->
+<script type="text/javascript" >
+    function login() {
+        var username = document.getElementById("username").value;
+        console.log(username)
+        var password = document.getElementById("password").value;
+        console.log(password)
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: '/loginvalidate',
+            async: false,
+            contentType: "application/json",
+            data:JSON.stringify({
+                "username": username,
+                "password": password
+            }),
+            success: function (result) {
+                console.log("data is :" + result)
+                if (result.code == 200) {
+                    alert("登陆成功");
+                }else {
+                    alert(result.message)
+                }
+            }
+        });
+
+    }
+</script>
+</body>
+
+</html>
