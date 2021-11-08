@@ -14,20 +14,21 @@
 
 ```java
 	    <!--websocket-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-            <version>2.1.6.RELEASE</version>
-        </dependency>
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-websocket</artifactId>
+<version>2.1.6.RELEASE</version>
+</dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>2.1.6.RELEASE</version>
-        </dependency>
-        <!--websocket-->
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-thymeleaf</artifactId>
+<version>2.1.6.RELEASE</version>
+</dependency>
+<!--websocket-->
 ```
-第二步，创建websocket的service类
+
+## 第二步，创建websocket的service类
 
 ```java
 package com.wangfugui.apprentice.service;
@@ -188,7 +189,8 @@ public class WebSocketConfig {
 
 ```
 这里是最关键的两个配置类了。
-本来到这里就可以跑起来进行聊天了，前端的代码在仓库里面，这里就不贴出来来了。但是我们发现由于师徒系统是集成的jwt的，所以我们没有办法进行基本的聊天，因为都被拦截了！所以我们要做的第一步就是把相关接口放开：
+##  第三步，本来到这里就可以跑起来进行聊天了
+前端的代码在仓库里面，这里就不贴出来来了。但是我们发现由于师徒系统是集成的jwt的，所以我们没有办法进行基本的聊天，因为都被拦截了！所以我们要做的第一步就是把相关接口放开：
 
 ```java
  @Override
@@ -309,20 +311,20 @@ public class WebSocketConfig {
 
 ```java
    @RequestMapping("/login")
-    public String login(HttpServletRequest request) {
+public String login(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies == null) {
-            return "login";
+        return "login";
         }
         //如果没有cookie则返回登录页面
         List<Cookie> collect = Arrays.stream(cookies).filter(cookie -> cookie.getName()
-                .contains(JwtTokenUtils.TOKEN_HEADER)).collect(Collectors.toList());
+        .contains(JwtTokenUtils.TOKEN_HEADER)).collect(Collectors.toList());
 
         if (collect.isEmpty()) {
-            return "login";
+        return "login";
         }
         return "home";
-    }
+        }
 ```
 我们创建一个首页页面
 
